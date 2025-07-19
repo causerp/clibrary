@@ -7,8 +7,10 @@ main(): Int64 {
 
     @When[os == "Windows"]
     const libName = "libclib.dll"
+
     @When[os == "Linux"]
     const libName = "libclib.so"
+
     @When[os == "macOS"]
     const libName = "libclib.dylib"
 
