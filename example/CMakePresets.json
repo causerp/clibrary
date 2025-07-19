@@ -1,0 +1,79 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "linux",
+      "displayName": "Linux",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "installDir": "${sourceDir}/install",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true,
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_ARCHIVE_OUTPUT_DIRECTORY": "${sourceDir}/",
+        "CMAKE_LIBRARY_OUTPUT_DIRECTORY": "${sourceDir}/",
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "macos",
+      "displayName": "macOS",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "installDir": "${sourceDir}/install",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true,
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_ARCHIVE_OUTPUT_DIRECTORY": "${sourceDir}/",
+        "CMAKE_LIBRARY_OUTPUT_DIRECTORY": "${sourceDir}/",
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "windows",
+      "displayName": "Windows",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "installDir": "${sourceDir}/install",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true,
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_ARCHIVE_OUTPUT_DIRECTORY": "${sourceDir}/",
+        "CMAKE_LIBRARY_OUTPUT_DIRECTORY": "${sourceDir}/",
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux",
+      "configurePreset": "linux",
+      "displayName": "Linux"
+    },
+    {
+      "name": "macos",
+      "configurePreset": "macos",
+      "displayName": "macOS"
+    },
+    {
+      "name": "windows",
+      "configurePreset": "windows",
+      "displayName": "Windows"
+    }
+  ]
+}
