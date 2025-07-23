@@ -11,7 +11,7 @@ foreign {
 
 @When[os != "Windows"]
 foreign {
-    func dlopen(name: CString, flag: IntNative): CPointer<Unit>
+    func dlopen(name: CString, flag: Int32): CPointer<Unit>
 
     func dlsym(handle: CPointer<Unit>, name: CString): CPointer<Unit>
 
