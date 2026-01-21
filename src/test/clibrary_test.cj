@@ -1,14 +1,15 @@
 package clibrary.test
 
-import clibrary.*
-import std.unittest.*
+import clibrary.{CLibrary, CLibraryException}
+
+// cjlint-ignore -start !G.NAM.04 function names should be lower camel case
 
 @When[os == "Windows"]
-private const validCLib = "opengl32.dll"
+private const VALID_C_LIB = "opengl32.dll"
 @When[os == "Linux"]
-private const validCLib = "libGL.so"
+private const VALID_C_LIB = "libGL.so"
 @When[os == "macOS"]
-private const validCLib = "/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL"
+private const VALID_C_LIB = "/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL"
 
 @Test
 class TestInvalidLib {
@@ -27,13 +28,13 @@ class TestInvalidLib {
 class TestValidLib {
     @TestCase
     func init_valid_library() {
-        try (clib = CLibrary(validCLib)) {
+        try (clib = CLibrary(VALID_C_LIB)) {
         }
     }
 
     @TestCase
     func load_valid_library() {
-        if (let Some(clib) <- CLibrary.load(validCLib)) {
+        if (let Some(clib) <- CLibrary.load(VALID_C_LIB)) {
             clib.close()
         } else {
             @Fail("Expected successful library load")
@@ -47,7 +48,7 @@ class TestCFunc {
 
     @BeforeAll
     func prepareData() {
-        clib = CLibrary.load(validCLib)
+        clib = CLibrary.load(VALID_C_LIB)
     }
 
     @AfterAll
@@ -76,3 +77,5 @@ class TestCFunc {
         }
     }
 }
+
+// cjlint-ignore -end function names should be lower camel case

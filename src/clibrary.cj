@@ -24,6 +24,9 @@ public class CLibraryException <: Exception {
     }
 }
 
+/**
+ * This is a library that loads C dynamic libraries (.dll, .dylib, .so).
+ */
 public class CLibrary <: Resource {
     private var m_handle: CPointer<Unit>
 
@@ -33,6 +36,13 @@ public class CLibrary <: Resource {
         }
     }
 
+    /**
+     * Create a new CLibrary object and loads the library.
+     *
+     * @param name library name with file extension.
+     *
+     * @throws CLibraryException if library fails to load.
+     */
     public init(name: String) {
         unsafe {
             try (name = LibC.mallocCString(name).asResource()) {
@@ -51,10 +61,22 @@ public class CLibrary <: Resource {
         }
     }
 
+    /**
+     * Create a new CLibrary object from existing library handle.
+     *
+     * @param handle library handle.
+     */
     private init(handle: CPointer<Unit>) {
         m_handle = handle
     }
 
+    /**
+     * Load a library.
+     *
+     * @param name library name with file extension.
+     *
+     * @return returns a CLibrary object or None if it fails to load.
+     */
     public static func load(name: String): ?CLibrary {
         unsafe {
             try (name = LibC.mallocCString(name).asResource()) {
@@ -88,6 +110,13 @@ public class CLibrary <: Resource {
         }
     }
 
+    /**
+     * Get a library function.
+     *
+     * @param name function name.
+     *
+     * @return returns a function pointer or None if it fails to find the function.
+     */
     public func get(name: String): ?CPointer<Unit> {
         unsafe {
             try (name = LibC.mallocCString(name).asResource()) {

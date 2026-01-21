@@ -9,13 +9,13 @@ Only `cdecl` functions are supported (Windows API libraries use `stdcall`)
 
 ```
 @When[os == "Windows"]
-const libName = "libadd.dll"
+const LIB_NAME = "libadd.dll"
 @When[os == "Linux"]
-const libName = "libadd.so"
+const LIB_NAME = "libadd.so"
 @When[os == "macOS"]
-const libName = "libadd.dylib"
+const LIB_NAME = "libadd.dylib"
 
-if (let Some(clib) <- CLibrary.load(libName)) {
+if (let Some(clib) <- CLibrary.load(LIB_NAME)) {
     if (let Some(cFuncPtr) <- clib.get("add")) {
         let add = CFunc<(Int64, Int64) -> Int64>(cFuncPtr)
         let result = unsafe { add(2, 3) }
